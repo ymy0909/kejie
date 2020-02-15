@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # kejie
 
 > A Vue.js project
@@ -19,3 +20,6 @@ npm run build --report
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+=======
+# 剋街宣传
+>>>>>>> 560473e2173fdc524475440fa88de2f56fab60fa
