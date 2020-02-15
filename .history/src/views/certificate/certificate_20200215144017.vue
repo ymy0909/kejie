@@ -1,0 +1,36 @@
+<template>
+<div class="certificate">
+    <img src="../../assets/images/jiangzhuang.png" alt="">
+    <van-button @click="jump"  color="#fe725b" class="second-modal-btn">请领取您的爱心捐助证书</van-button>
+</div>
+</template>
+
+<script>
+export default {
+  name: 'Certificate',
+  components: {},
+  props: {},
+  data () {
+    return {
+
+    }
+  },
+  created () { },
+  mounted () { },
+  methods: { },
+  computed: { },
+  watch: { }
+}
+</script>
+
+<style scoped lang="less">
+  .certificate{
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    z-index: 1;
+    background: #fbf1ee;
+    padding: 0 30px;
+    box-sizing: border-box;
+  }
+</style>
