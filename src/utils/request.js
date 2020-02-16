@@ -7,7 +7,7 @@ const service = axios.create({
   // baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000, // request timeout
-  // method: 'post',
+  method: 'post',
   url: 'http://test.whowen.com:8080/app/loveActivity/',
   headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
 })
@@ -20,11 +20,12 @@ service.interceptors.request.use(
     //   token: 20100308
     // }
     // config.params = qs.stringify(data)
-    config.method = config.method || 'post'
-    config.url += '/' + config.api
+    config.method = config.method ? config.method : 'post'
+    console.log('method', config.method)
+    config.url += config.api
     console.log('data', config.data)
     config.params = Object.assign({
-      userId: '05149046'
+      userId: '05149067'
     }, config.data ? config.data : {})
     if (config.urlRedirect) {
       config.url = 'https://www.tianqiapi.com/api?version=epidemic&appid=23035354&appsecret=8YvlPNrz'

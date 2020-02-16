@@ -15,7 +15,7 @@
           <img src="../../assets/images/erweima.png" alt="">
           <div class="certificate-erweima-box-content">
             <div class="certificate-erweima-box-content1">
-              剋街APP将以您的名义为韩红
+              剋街APP将以您的名义为武汉市
               基金会捐款，爱心驿使用户均
               可免费领取免疫套装一份。
             </div>
