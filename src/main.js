@@ -9,11 +9,16 @@ import 'styles/reset.css'
 import 'styles/border.css'
 import 'lib-flexible/flexible'
 import {
-  Button
+  Button,
+  Field,
+  Toast
 } from 'vant'
 
-Vue.use(Button)
+Vue.use(Button).use(Field).use(Toast)
 Vue.config.productionTip = false
+fastClick.prototype.focus = function (targetElement) {
+  targetElement.focus()
+}
 fastClick.attach(document.body)
 
 router.beforeEach((to, from, next) => {

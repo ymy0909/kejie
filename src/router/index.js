@@ -9,7 +9,15 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/home'
+      redirect: '/xiazai'
+    },
+    {
+      path: '/xiazai',
+      name: 'xiazai',
+      component: () => import('@/views/xiazai/xiazai'),
+      meta: {
+        title: '剋街APP下载'
+      }
     },
     {
       path: '/home',
@@ -41,6 +49,22 @@ export default new Router({
       component: () => import('@/views/suit/suit'),
       meta: {
         title: '防疫套装'
+      }
+    },
+    {
+      path: '/receive',
+      name: 'receive',
+      component: () => import('@/views/receive/receive'),
+      meta: {
+        title: '领取成功'
+      }
+    },
+    {
+      path: '/address',
+      name: 'address',
+      component: () => import('@/views/address/address'),
+      meta: {
+        title: '送货上门'
       }
     }
   ]

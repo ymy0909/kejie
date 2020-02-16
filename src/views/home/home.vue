@@ -29,16 +29,16 @@ export default {
   },
   created () { },
   mounted () {
-    this.participate()
   },
   methods: {
     jump () {
-      this.$router.push({path: 'finishDonation'})
+      participateAndGetDonationInfoApi().then(res => {
+        // console.log(res)
+        this.$router.push({path: 'finishDonation'})
+      })
     },
     participate () {
-      participateAndGetDonationInfoApi().then(res => {
-        console.log(res)
-      })
+
     }
   },
   computed: { },
@@ -96,10 +96,11 @@ export default {
            z-index: 20;
            left:50%;
            transform: translate(-50%,0);
-           height: 30px;
-           line-height: 30px;
+           height: 34px;
+           line-height: 34px;
            bottom: 40px;
            border-radius: 15px;
+           font-weight: 800;
          }
       }
     }

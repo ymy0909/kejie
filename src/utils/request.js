@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Toast } from 'vant'
 const errorText = require('./errorText.json')
 
 // create an axios instance
@@ -6,7 +7,7 @@ const service = axios.create({
   // baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000, // request timeout
-  method: 'post',
+  // method: 'post',
   url: 'http://test.whowen.com:8080/app/loveActivity/',
   headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8' }
 })
@@ -19,9 +20,14 @@ service.interceptors.request.use(
     //   token: 20100308
     // }
     // config.params = qs.stringify(data)
+    config.method = config.method || 'post'
     config.url += '/' + config.api
-    config.params = {
-      userId: '05149026'
+    console.log('data', config.data)
+    config.params = Object.assign({
+      userId: '05149046'
+    }, config.data ? config.data : {})
+    if (config.urlRedirect) {
+      config.url = 'https://www.tianqiapi.com/api?version=epidemic&appid=23035354&appsecret=8YvlPNrz'
     }
     return config
 
@@ -86,7 +92,18 @@ service.interceptors.response.use(
     //   // console.log('res.data', res.data)
     //   return Promise.resolve(res.data)
     // }
-    return Promise.resolve(res)
+    if (!res.code) {
+      return Promise.resolve(res.data)
+    }
+    if (res.code === 200 || res.code === '200') {
+      return Promise.resolve(res.data)
+    } else {
+      Toast.fail(res.msg)
+      // eslint-disable-next-line prefer-promise-reject-errors
+      return Promise.reject({
+        type: 'code'
+      })
+    }
   },
   error => {
     console.error('err' + error) // for debug
