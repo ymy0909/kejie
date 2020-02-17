@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { participateAndGetDonationInfoApi } from '@/api/api.js'
+// import { participateAndGetDonationInfoApi } from '@/api/api.js'
 export default {
   name: 'Home',
   components: {},
@@ -29,15 +29,40 @@ export default {
   },
   created () { },
   mounted () {
+    // 原生app调用h5方法，iosToH5是methods中定义的方法名。
+    // const vm = this
+    // this.$bridge.registerhandler('iosToH5', (data, responseCallback) => {
+    //   // data是原生app传递给h5的参数
+    //   vm.native_data = data
+    // })
+    this.goNative()
   },
   methods: {
     jump () {
-      participateAndGetDonationInfoApi().then(res => {
-        // console.log(res)
-        this.$router.push({path: 'finishDonation'})
-      })
+      // participateAndGetDonationInfoApi().then(res => {
+      //   // console.log(res)
+      //   this.$router.push({path: 'finishDonation'})
+      // })
+      this.$router.push({path: 'finishDonation'})
     },
     participate () {
+
+    },
+    // h5调用原生方法，testWebViewBridge为原生app定义的方法名。action为h5传递给原生app的参数，可以为多个。data为原生app传递给h5参数
+    goNative () {
+      const vm = this
+      this.$bridge.callhandler(
+        'getUserId',
+        // action: ''
+        { },
+        data => {
+          vm.ddd = data
+          // 处理返回数据
+        }
+      )
+    },
+    // h5注册方法，供app调用
+    iosToH5 () {
 
     }
   },

@@ -13,6 +13,8 @@ import {
   Field,
   Toast
 } from 'vant'
+import Bridge from '@/utils/bridge.js' // 此路径根据实际bridge.js路径填写
+Vue.prototype.$bridge = Bridge
 
 Vue.use(Button).use(Field).use(Toast)
 Vue.config.productionTip = false
