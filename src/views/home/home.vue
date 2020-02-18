@@ -6,7 +6,7 @@
           <!-- home-modal-content-close -->
           <div class="home-modal-content-close">
                 <div class="home-modal-content-close-item">
-                    <img src="../../assets/images/close.png" alt="">
+                    <img src="../../assets/images/close.png" alt="" @click="close">
                 </div>
           </div>
           <img src="../../assets/images/modal.png" alt="" class="home-modal-content-manipic">
@@ -17,7 +17,7 @@
 </template>
 
 <script>
-// import { participateAndGetDonationInfoApi } from '@/api/api.js'
+import { participateAndGetDonationInfoApi } from '@/api/api.js'
 export default {
   name: 'Home',
   components: {},
@@ -36,30 +36,59 @@ export default {
     //   vm.native_data = data
     // })
     this.goNative()
+    // this.$store.commit('updateUserId', 100)
   },
   methods: {
     jump () {
-      // participateAndGetDonationInfoApi().then(res => {
-      //   // console.log(res)
-      //   this.$router.push({path: 'finishDonation'})
-      // })
-      this.$router.push({path: 'finishDonation'})
+      participateAndGetDonationInfoApi().then(res => {
+        // console.log(res)
+        this.$router.push({path: 'finishDonation'})
+      })
+      // this.$router.push({path: 'finishDonation'})
     },
     participate () {
 
     },
     // h5调用原生方法，testWebViewBridge为原生app定义的方法名。action为h5传递给原生app的参数，可以为多个。data为原生app传递给h5参数
-    goNative () {
+    // goNative () {
+    //   const vm = this
+    //   this.$bridge.callhandler(
+    //     'getUserId',
+    //     // action: ''
+    //     { },
+    //     id => {
+    //       vm.ddd = id
+    //       // 处理返回数据
+    //       // this.$store.commit('updateUserId', id)
+    //       this.$store.commit('updateUserId', 100)
+    //     }
+    //   )
+    // },
+    close () {
       const vm = this
-      this.$bridge.callhandler(
-        'getUserId',
-        // action: ''
-        { },
-        data => {
-          vm.ddd = data
-          // 处理返回数据
-        }
-      )
+      if(this.$bridge){
+        this.$bridge.callhandler(
+                'close',
+                // action: ''
+                {
+                  
+                },
+                data => {
+                  vm.ddd = data
+                  // 处理返回数据
+                }
+              )
+      }
+    },
+    goNative () {
+      if (this.$bridge) {
+        this.$bridge.registerHandler('getUserId', function (data, responseCallback) {
+          let nativedata = data
+          this.$store.commit('updateUserId', nativedata)
+          console.log(nativedata)
+          responseCallback('收到请求')
+        })
+      }
     },
     // h5注册方法，供app调用
     iosToH5 () {

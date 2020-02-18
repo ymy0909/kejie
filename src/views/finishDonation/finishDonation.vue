@@ -62,7 +62,7 @@ export default {
       addDonorApi(this.name).then(() => {
         this.$router.push({path: 'certificate'})
       })
-      this.$router.push({path: 'certificate'})
+      // this.$router.push({path: 'certificate'})
       // this.$router.push({path: 'certificate'})
     }
   },

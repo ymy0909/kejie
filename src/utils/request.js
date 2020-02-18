@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { Toast } from 'vant'
+import store from '@/store'
 const errorText = require('./errorText.json')
 
 // create an axios instance
@@ -24,8 +25,10 @@ service.interceptors.request.use(
     console.log('method', config.method)
     config.url += config.api
     console.log('data', config.data)
+    console.log('id', store.state.userId)
     config.params = Object.assign({
-      userId: '05149067'
+      userId: store.state.userId
+      // 05149067
     }, config.data ? config.data : {})
     if (config.urlRedirect) {
       config.url = 'https://www.tianqiapi.com/api?version=epidemic&appid=23035354&appsecret=8YvlPNrz'

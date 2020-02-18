@@ -11,12 +11,26 @@ import 'lib-flexible/flexible'
 import {
   Button,
   Field,
-  Toast
+  Toast,
+  Dialog
 } from 'vant'
-import Bridge from '@/utils/bridge.js' // 此路径根据实际bridge.js路径填写
-Vue.prototype.$bridge = Bridge
+// import Bridge from '@/utils/bridge.js'
+import * as utils from '@/utils/util-bridgecopy.js'
+utils.initBridgeCopy(function name(bridge) {
+  Vue.prototype.$bridge = bridge
+})
+import store from '@/store' // 此路径根据实际bridge.js路径填写
+// Vue.prototype.$bridge = Bridge
 
-Vue.use(Button).use(Field).use(Toast)
+Vue.use(Button).use(Field).use(Toast).use(Dialog)
+
+import VueTouch from '@/directive/longtap/index'
+Vue.directive("longtap", {
+  bind: function (el, binding) {
+    new VueTouch(el, binding, "longtap");
+  }
+});
+
 Vue.config.productionTip = false
 fastClick.prototype.focus = function (targetElement) {
   targetElement.focus()
@@ -35,6 +49,7 @@ router.beforeEach((to, from, next) => {
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

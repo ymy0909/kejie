@@ -190,7 +190,7 @@ export default {
           height: 52px;
           line-height: 52px;
           color: #FE725B;
-          font-size: 12Px;
+          font-size: 12px;
           width: 80px;
         }
     }
